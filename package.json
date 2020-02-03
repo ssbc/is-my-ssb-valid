@@ -1,0 +1,28 @@
+{
+  "name": "is-my-ssb-valid",
+  "version": "0.0.1",
+  "description": "build scuttlebutt message validators from JSON Schema",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ssbc/is-my-ssb-valid.git"
+  },
+  "keywords": [
+    "scuttlebutt",
+    "schema",
+    "validator"
+  ],
+  "author": "mixmix",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/ssbc/is-my-ssb-valid/issues"
+  },
+  "homepage": "https://github.com/ssbc/is-my-ssb-valid#readme",
+  "dependencies": {
+    "is-my-json-valid": "^2.20.0",
+    "ssb-msg-content": "file:ssb-msg-content"
+  }
+}
