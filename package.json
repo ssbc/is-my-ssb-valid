@@ -1,6 +1,6 @@
 {
   "name": "is-my-ssb-valid",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "build scuttlebutt message validators from JSON Schema",
   "main": "index.js",
   "scripts": {
