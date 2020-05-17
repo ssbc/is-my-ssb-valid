@@ -22,6 +22,9 @@ isProfile(A)
 
 console.log(isProfile.errors)
 // => null | [Error]
+
+console.log(isProfile.errorsString)
+// => '' | 'data.type is required'  (example)
 ```
 
 ```js
@@ -41,8 +44,11 @@ pull(
 
 ### `Validator(schema) => isValid`
 
-expect a JSON schema
-
+where: 
+- `schema` *Object* is a JSON schema
+- `extras` *Array* (optional) is an Array of additional custom validation functions.
+    - These will be run _after_ the schema-based validation, and are expected to either return `true` (no problem) or an `Error` (a problem) was found.
+    - any error returned be added to the `isValid.errors` and `isValid.errorsString` for you (see below)
 
 ### `isValid(msg) => Boolean`
 
