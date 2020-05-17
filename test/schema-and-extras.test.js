@@ -29,9 +29,13 @@ test('schema-and-extras', t => {
   t.true(validator({ type: 'post' }))
   t.true(validator({ type: 'post', date: '2020-05-18' }))
 
-  t.false(validator({ type: 'post', date: '202' }))
+  t.false(validator({ type: 100, date: '202' }))
+
+  t.equal(validator.errors.length, 2, 'multiple errors!')
+  t.equal(validator.errorsString.split(';').length, 2, 'errors in errorsString are ;-seperated')
+
   t.true(
-    validator.errors[0].toString().match(/requires an EDTF/),
+    validator.errors.find(e => e.toString().match(/requires an EDTF/)),
     'validator.errors gets extra errors'
   )
   t.true(
