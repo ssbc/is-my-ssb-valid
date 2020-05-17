@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "build scuttlebutt message validators from JSON Schema",
   "main": "index.js",
+  "scripts": {
+    "test": "tape '**/*.test.js' | tap-spec"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ssbc/is-my-ssb-valid.git"
@@ -21,5 +24,9 @@
   "dependencies": {
     "is-my-json-valid": "^2.20.0",
     "ssb-msg-content": "^1.0.1"
+  },
+  "devDependencies": {
+    "tap-spec": "^5.0.0",
+    "tape": "^5.0.0"
   }
 }
