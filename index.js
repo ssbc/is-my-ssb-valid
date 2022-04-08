@@ -7,7 +7,7 @@ module.exports = function BuildValidator (schema, extras = []) {
   const isValid = Validator(schema, { verbose: true })
 
   return function validator (msg) {
-    var result = isValid(getContent(msg))
+    let result = isValid(getContent(msg))
 
     validator.errors = isValid.errors
 
@@ -30,9 +30,16 @@ function stringify (errors) {
   if (!errors) return ''
 
   return errors
-    .map(e => e.field && e.message
-      ? `${e.field} ${e.message}`
-      : e.toString()
-    )
+    .map(e => {
+      if (e.field && e.message) {
+        let str = `${e.field} ${e.message}`
+        if (e.message.endsWith('has additional properties')) {
+          str += ` (${e.value})`
+        }
+        return str
+      }
+
+      return e.toString()
+    })
     .join('; ')
 }
