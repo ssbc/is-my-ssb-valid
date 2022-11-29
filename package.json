@@ -23,10 +23,10 @@
   "homepage": "https://github.com/ssbc/is-my-ssb-valid#readme",
   "dependencies": {
     "is-my-json-valid": "^2.20.0",
-    "ssb-msg-content": "^1.0.1",
-    "tap-arc": "^0.3.4"
+    "ssb-msg-content": "^1.0.1"
   },
   "devDependencies": {
-    "tape": "^5.0.0"
+    "tape": "^5.0.0",
+    "tap-arc": "^0.3.4"
   }
 }
