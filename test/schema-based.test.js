@@ -64,11 +64,26 @@ test('schema-based', t => {
     value: {
       author: '@ye+QM09iPcDJD6YvQYjoQc7sLF/IFhmNbEqgdzQo3lQ=.ed25519',
       timestamp: 123123123123,
-      content: { type: 'post' }
+      content: {
+        type: 'post',
+        date: Date.now(),
+        tangles: {
+          root: '%rootId',
+          previous: ['%previousId']
+        }
+      }
     }
   }
   t.true(isValid(fullMessage), 'can validate full messsages')
   t.true(isValid(fullMessage.value), 'can validate full messsage.value')
+
+  const startTime = Date.now()
+  const N = 1e6 // million
+  for (let i = 0; i < N; i++) {
+    isValid(fullMessage)
+  }
+  const endTime = Date.now()
+  t.pass(`validated ${N} messages in ${endTime - startTime}ms`)
 
   t.end()
 })
