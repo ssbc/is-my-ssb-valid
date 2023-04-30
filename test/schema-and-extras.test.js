@@ -3,13 +3,12 @@ const Validator = require('../')
 
 test('schema-and-extras', t => {
   const schema = {
-    required: ['type'],
+    type: 'object',
     properties: {
-      type: {
-        type: 'string',
-        date: 'string'
-      }
-    }
+      type: { type: 'string' },
+      date: { type: 'string' }
+    },
+    required: ['type']
   }
 
   function isEDTF (msgContent) {
