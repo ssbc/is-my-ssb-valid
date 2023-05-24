@@ -5,13 +5,8 @@ test('schema-based', t => {
   const schema = {
     type: 'object',
     properties: {
-      type: {
-        type: 'string',
-        pattern: '^post'
-      },
-      date: {
-        type: 'integer'
-      },
+      type: { type: 'string', pattern: '^post' },
+      date: { type: 'integer' },
       tangles: {
         type: 'object',
         properties: {
