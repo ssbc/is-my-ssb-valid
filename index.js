@@ -1,10 +1,13 @@
-const Validator = require('is-my-json-valid')
+const AJV = require('ajv')
 const getContent = require('ssb-msg-content')
 
 module.exports = function BuildValidator (schema, extras = []) {
   if (!Array.isArray(extras)) throw new Error('BuildValidator extras should be an Array')
 
-  const isValid = Validator(schema, { verbose: true })
+  const ajv = new AJV({
+    allErrors: true
+  })
+  const isValid = ajv.compile(schema)
 
   return function validator (msg) {
     let result = isValid(getContent(msg))
@@ -31,15 +34,28 @@ function stringify (errors) {
 
   return errors
     .map(e => {
-      if (e.field && e.message) {
-        let str = `${e.field} ${e.message}`
-        if (e.message.endsWith('has additional properties')) {
-          str += ` (${e.value})`
-        }
-        return str
-      }
+      if (typeof e.instancePath !== 'string') return e.message
 
-      return e.toString()
+      const path = prettyPath(e.instancePath)
+      switch (e.keyword) {
+        case 'required':
+          return `${path}.${e.params.missingProperty} is required`
+        case 'additionalProperties':
+          return `${path} must NOT have additional properties (${path}.${e.params.additionalProperty})`
+        default:
+          return `${path} ${e.message}`
+      }
     })
     .join('; ')
+}
+
+function prettyPath (slashPath) {
+  if (slashPath === '') return 'data'
+
+  return [
+    'data',
+    ...slashPath.split('/')
+  ]
+    .filter(Boolean)
+    .join('.')
 }
